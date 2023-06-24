@@ -1,5 +1,5 @@
-import { messagesName } from '../constants/index.js';
-import {showMessage} from './showMessage.js';
+import { messagesName } from '../constants/messages-name.js';
+import {showMessage} from './show-message.js';
 
 export const exit = () => {
     showMessage(messagesName.parting);
