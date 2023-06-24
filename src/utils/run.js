@@ -1,23 +1,23 @@
 
 import { COMMANDS } from "../constants/commands.js";
 import { messagesName } from "../constants/messages-name.js";
-import { create } from "../modules/file-system.js";
+import { addFile, readFile, removeFile, renameFile } from "../modules/file-system.js";
 import { cd, ls, up } from "../modules/navigation.js";
 import { showMessage } from "./show-message.js";
 
 export const run = (command, args) => {
     switch (command) {
         case COMMANDS.add:
-            create(args);
+            addFile(args);
             break;
         case COMMANDS.rm:
-            
+            removeFile(args);
             break;
         case COMMANDS.rn:
-            
+            renameFile(args);
             break;
         case COMMANDS.cat:
-            
+            readFile(args);
             break;
         case COMMANDS.cp:
             
