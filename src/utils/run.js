@@ -2,6 +2,7 @@
 import { COMMANDS } from "../constants/commands.js";
 import { messagesName } from "../constants/messages-name.js";
 import { addFile, copyFile, moveFile, readFile, removeFile, renameFile } from "../modules/file-system.js";
+import { calculateHash } from "../modules/hash.js";
 import { cd, ls, up } from "../modules/navigation.js";
 import { showMessage } from "./show-message.js";
 
@@ -33,6 +34,9 @@ export const run = async (command, args) => {
             break;
         case COMMANDS.cd:
             cd(args);
+            break;
+        case COMMANDS.hash:
+            await calculateHash(args);
             break;
         default:
             break;

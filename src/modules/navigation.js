@@ -36,7 +36,7 @@ export const ls = async (args) => {
         console.table(directories.concat(files));
 
     } catch (error) {
-        showMessage(messagesName.error, error)
+        showMessage(messagesName.error, error);
     }    
 }
 
@@ -44,7 +44,7 @@ export const up = () => {
     try {
         process.chdir('..');
     } catch (error) {
-        showMessage(messagesName.error, error)
+        showMessage(messagesName.error, error);
     }
   };
   
@@ -52,6 +52,6 @@ export const up = () => {
     try {
         process.chdir(args[0]);
     } catch (error) {
-        showMessage(messagesName.error, error)
+        showMessage(messagesName.error, error);
     }
   };

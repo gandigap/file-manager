@@ -8,4 +8,5 @@ export const COMMANDS = {
     ls: 'ls',
     up: 'up',
     cd: 'cd',
+    hash: 'hash',
   }

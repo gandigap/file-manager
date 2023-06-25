@@ -4,4 +4,5 @@ export const messagesName = {
     curDir: 'current directory',
     greet: 'greet',
     parting: 'parting',
+    hash: 'hash',
 }

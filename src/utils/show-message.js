@@ -21,6 +21,9 @@ export const showMessage = (nameMessage, additionalInfo) => {
         case messagesName.curDir:
             process.stdout.write(`You are currently in ${process.cwd()}${endOfLine}`);
             break;
+        case messagesName.hash:
+            process.stdout.write(`Hash file is ${additionalInfo}${endOfLine}`);
+            break;
                  
     }
     process.stdout.write(`${message}${endOfLine}`); 
