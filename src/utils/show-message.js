@@ -24,6 +24,18 @@ export const showMessage = (nameMessage, additionalInfo) => {
         case messagesName.hash:
             process.stdout.write(`Hash file is ${additionalInfo}${endOfLine}`);
             break;
+        case messagesName.eol:
+            process.stdout.write(`EOL stringify : ${additionalInfo}${endOfLine}`);
+            break;
+        case messagesName.amountCPU:
+            process.stdout.write(`CPUS amount: ${additionalInfo}`);
+            break;
+        case messagesName.homeDir:
+            process.stdout.write(`Home directory: ${additionalInfo}`);
+            break;
+        case messagesName.userName:
+            process.stdout.write(`User name : ${additionalInfo}`);
+            break;
                  
     }
     process.stdout.write(`${message}${endOfLine}`); 

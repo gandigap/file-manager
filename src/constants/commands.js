@@ -9,4 +9,5 @@ export const COMMANDS = {
     up: 'up',
     cd: 'cd',
     hash: 'hash',
+    os: 'os',
   }

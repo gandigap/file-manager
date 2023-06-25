@@ -5,4 +5,7 @@ export const messagesName = {
     greet: 'greet',
     parting: 'parting',
     hash: 'hash',
+    amountCPU: 'amountCPU',
+    homeDir: 'homeDir',
+    userName: 'userName',
 }
