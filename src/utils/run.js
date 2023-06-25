@@ -1,6 +1,7 @@
 
 import { COMMANDS } from "../constants/commands.js";
 import { messagesName } from "../constants/messages-name.js";
+import { compress, decompress } from "../modules/compress-decompress.js";
 import { addFile, copyFile, moveFile, readFile, removeFile, renameFile } from "../modules/file-system.js";
 import { calculateHash } from "../modules/hash.js";
 import { cd, ls, up } from "../modules/navigation.js";
@@ -41,6 +42,12 @@ export const run = async (command, args) => {
             break;
         case COMMANDS.os:
             await opepationSystem(args);
+            break;
+        case COMMANDS.compress:
+            await compress(args);
+            break;
+        case COMMANDS.decompress:
+            await decompress(args);
             break;
         default:
             break;

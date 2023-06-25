@@ -10,4 +10,6 @@ export const COMMANDS = {
     cd: 'cd',
     hash: 'hash',
     os: 'os',
+    compress: 'compress',
+    decompress: 'decompress',
   }

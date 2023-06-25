@@ -5,7 +5,7 @@ import { messagesName } from '../constants/messages-name.js';
 
 export const calculateHash = async (args) => {
     const fileContent = await readFile(args[0]);
-    console.log('calculateHash')
+    
     const hash = createHash('sha256');
 
     const hashHex = hash
