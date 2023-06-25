@@ -8,15 +8,15 @@ export const showMessage = (nameMessage, additionalInfo) => {
         case messagesName.greet:
             message = `Welcome to the File Manager, ${getUserName()}!`;
             break;
-        case messagesName.parting:
+        case messagesName.exit:
             message = `Thank you for using File Manager, ${getUserName()}, goodbye!`;
             break; 
         case messagesName.error:
             process.stdout.write(`${additionalInfo}${endOfLine}`);
-            message = `Operation failed`;
             break;
         case messagesName.success:
-            process.stdout.write(`${additionalInfo}${endOfLine}`);
+            process.stdout.write(`${endOfLine}${additionalInfo}${endOfLine}`); 
+            process.stdout.write(`Dear user, please enter the desired command.`);           
             break;
         case messagesName.curDir:
             process.stdout.write(`You are currently in ${process.cwd()}${endOfLine}`);
@@ -36,7 +36,14 @@ export const showMessage = (nameMessage, additionalInfo) => {
         case messagesName.userName:
             process.stdout.write(`User name : ${additionalInfo}`);
             break;
+        case messagesName.enterCommand:
+            process.stdout.write(`*** Dear user, please enter the desired command. ***`);
+            break; 
+        case messagesName.notFoundCommand:
+            process.stdout.write(`*** Sorry, entered command not found. ***${endOfLine}`);
+            break;           
                  
     }
     process.stdout.write(`${message}${endOfLine}`); 
+    
 }

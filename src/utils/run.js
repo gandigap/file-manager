@@ -6,12 +6,13 @@ import { addFile, copyFile, moveFile, readFile, removeFile, renameFile } from ".
 import { calculateHash } from "../modules/hash.js";
 import { cd, ls, up } from "../modules/navigation.js";
 import { opepationSystem } from "../modules/operation-sytem.js";
+import { exit } from "./exit.js";
 import { showMessage } from "./show-message.js";
 
 export const run = async (command, args) => {
     switch (command) {
         case COMMANDS.add:
-            addFile(args);
+            await addFile(args);
             break;
         case COMMANDS.rm:
             removeFile(args);
@@ -29,7 +30,7 @@ export const run = async (command, args) => {
             await moveFile(args);
             break;
         case COMMANDS.ls:
-            ls(args);
+            await ls(args);
             break;
         case COMMANDS.up:
             up();
@@ -49,9 +50,14 @@ export const run = async (command, args) => {
         case COMMANDS.decompress:
             await decompress(args);
             break;
+        case COMMANDS.exit:
+            exit();
+            break;
         default:
+            showMessage(messagesName.notFoundCommand);
             break;
     }
 
     showMessage(messagesName.curDir);
+    showMessage(messagesName.enterCommand);
 }

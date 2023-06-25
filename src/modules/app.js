@@ -7,12 +7,12 @@ import { run } from '../utils/run.js';
 const app = async () => {
     showMessage(messagesName.greet);
     showMessage(messagesName.curDir);
+    showMessage(messagesName.enterCommand);
 
     process.stdin.on("data", (data) => { 
         const [command , ...args] = data.toString().trim().split(' ');
       
         run(command, args);
-        console.log('data', command, args)
     });
 
     process.on('SIGINT', () => exit());

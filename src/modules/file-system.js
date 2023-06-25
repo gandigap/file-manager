@@ -1,5 +1,5 @@
-import { basename, join} from 'path'
-import { writeFile, rename, rm } from 'fs/promises';
+import path, { basename, join} from 'path'
+import { rename, rm } from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import { stdout } from 'process';
 
@@ -7,12 +7,23 @@ import { getFullPath } from '../utils/get-full-path.js';
 import { showMessage } from '../utils/show-message.js';
 import { messagesName } from '../constants/messages-name.js';
 
-export const addFile = async (args) => {
+export const addFile = async (args) => {   
     try {
-        await writeFile(getFullPath(args[0]), '', {flag: wx});
+        const ws = createWriteStream(args[0]);
+
+        const handleError = (error) => {
+            ws.destroy();
+            showMessage(messagesName.error, `Create file failed: ${error}`);        
+        }; 
+
+        ws.end();
+        ws.on('error', handleError);
+        ws.on('finish', () => {
+            showMessage(messagesName.success, "Create file succesfully"); 
+        });
     } catch (error) {
-        showMessage(messagesName.error, "Create file operation failed");
-    }
+        showMessage(messagesName.error, `Create file failed: ${error}`);
+    }  
 }
 
 export const renameFile = async (args) => {    
@@ -35,14 +46,20 @@ export const removeFile = async (args) => {
 
 export const readFile = async (args) => {          
     const rs = createReadStream(args[0]);
-    
-    rs.on('error', handleError)
-        .pipe(process.stdout);
 
     const handleError = (error) => {
-        showMessage(messagesName.error, "Read file operation failed");
         rs.destroy();
-    };      
+        showMessage(messagesName.error, "Read file operation failed");        
+    }; 
+
+    rs.on('error', handleError);
+    
+
+    rs.on('end', () => {        
+        showMessage(messagesName.success, "Read file successfully!")
+    });
+
+    rs.pipe(process.stdout);         
 }
 
 export const copyFile = async (args) => {   

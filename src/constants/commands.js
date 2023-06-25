@@ -12,4 +12,5 @@ export const COMMANDS = {
     os: 'os',
     compress: 'compress',
     decompress: 'decompress',
+    exit: '.exit',
   }

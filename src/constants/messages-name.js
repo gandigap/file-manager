@@ -3,9 +3,11 @@ export const messagesName = {
     success: 'success',
     curDir: 'current directory',
     greet: 'greet',
-    parting: 'parting',
+    exit: 'exit',
     hash: 'hash',
     amountCPU: 'amountCPU',
     homeDir: 'homeDir',
     userName: 'userName',
+    enterCommand: 'enterCommand',
+    notFoundCommand: 'notFoundCommand',
 }
