@@ -1,11 +1,11 @@
 
 import { COMMANDS } from "../constants/commands.js";
 import { messagesName } from "../constants/messages-name.js";
-import { addFile, readFile, removeFile, renameFile } from "../modules/file-system.js";
+import { addFile, copyFile, moveFile, readFile, removeFile, renameFile } from "../modules/file-system.js";
 import { cd, ls, up } from "../modules/navigation.js";
 import { showMessage } from "./show-message.js";
 
-export const run = (command, args) => {
+export const run = async (command, args) => {
     switch (command) {
         case COMMANDS.add:
             addFile(args);
@@ -17,13 +17,13 @@ export const run = (command, args) => {
             renameFile(args);
             break;
         case COMMANDS.cat:
-            readFile(args);
+            await readFile(args);
             break;
         case COMMANDS.cp:
-            
+            await copyFile(args);
             break;
         case COMMANDS.mv:
-            
+            await moveFile(args);
             break;
         case COMMANDS.ls:
             ls(args);

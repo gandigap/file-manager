@@ -1,5 +1,6 @@
+import { basename, join} from 'path'
 import { writeFile, rename, rm } from 'fs/promises';
-import {createReadStream} from 'fs';
+import { createReadStream, createWriteStream } from 'fs';
 import { stdout } from 'process';
 
 import { getFullPath } from '../utils/get-full-path.js';
@@ -42,4 +43,47 @@ export const readFile = async (args) => {
         showMessage(messagesName.error, "Read file operation failed");
         rs.destroy();
     };      
+}
+
+export const copyFile = async (args) => {   
+    const fileName = basename(args[0]);   
+    const destinationPath = join(args[1],fileName);
+    const rs = createReadStream(args[0]);   
+    const ws = createWriteStream(destinationPath);
+    
+    const handleError = (error) => {
+        showMessage(messagesName.error, error);
+        rs.destroy();
+        ws.destroy();
+    };  
+
+    rs.on('error',handleError);
+    ws.on('error', handleError);
+    ws.on('finish', () => {
+        showMessage(messagesName.success, "File copied successfully!")
+    });
+   
+    rs.pipe(ws);
+}
+
+export const moveFile = async (args) => {          
+    const fileName = basename(args[0]);   
+    const destinationPath = join(args[1],fileName);
+    const rs = createReadStream(args[0]);   
+    const ws = createWriteStream(destinationPath);
+    
+    const handleError = (error) => {
+        showMessage(messagesName.error, error);
+        rs.destroy();
+        ws.destroy();
+    };  
+
+    rs.on('error',handleError);
+    ws.on('error', handleError);
+    ws.on('finish', () => {
+        removeFile(args);
+        showMessage(messagesName.success, "File moved successfully!")
+    });
+   
+    rs.pipe(ws);  
 }

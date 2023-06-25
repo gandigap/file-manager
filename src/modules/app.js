@@ -4,7 +4,7 @@ import { exit } from '../utils/exit.js';
 import { COMMANDS } from '../constants/commands.js';
 import { run } from '../utils/run.js';
 
-const app = () => {
+const app = async () => {
     showMessage(messagesName.greet);
     showMessage(messagesName.curDir);
 
@@ -13,7 +13,7 @@ const app = () => {
       
         run(command, args);
         console.log('data', command, args)
-      });
+    });
 
     process.on('SIGINT', () => exit());
 }

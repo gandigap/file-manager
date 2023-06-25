@@ -13,7 +13,10 @@ export const showMessage = (nameMessage, additionalInfo) => {
             break; 
         case messagesName.error:
             process.stdout.write(`${additionalInfo}${endOfLine}`);
-            message = `Some error`;
+            message = `Operation failed`;
+            break;
+        case messagesName.success:
+            process.stdout.write(`${additionalInfo}${endOfLine}`);
             break;
         case messagesName.curDir:
             process.stdout.write(`You are currently in ${process.cwd()}${endOfLine}`);
