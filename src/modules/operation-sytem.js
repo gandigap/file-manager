@@ -26,7 +26,7 @@ export const opepationSystem = (args) => {
             showMessage(messagesName.arch, arch());
             break;
         default:
-            showMessage(messagesName.error, `Please add args for os command,example: os --cpus. And try again.${endOfLine}`);
+            showMessage(messagesName.error, `Operation failed`);
             break;
     }
 }

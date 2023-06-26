@@ -9,10 +9,12 @@ import { messagesName } from '../constants/messages-name.js';
 
 export const addFile = async (args) => {  
     return new Promise((resolve, reject) => {   
-        const ws = createWriteStream(args[0]);
+        const ws = createWriteStream(args[0],{
+            flags: 'wx'
+        });
 
         const handleError = (error) => {            
-            showMessage(messagesName.error, `Create file failed: ${error}`);
+            showMessage(messagesName.error, `Operation failed: ${error}`);
             ws.destroy();  
             reject(); 
         }; 
@@ -20,6 +22,7 @@ export const addFile = async (args) => {
         ws.end();
         ws.on('error', handleError);
         ws.on('finish', () => {
+            console.log('2')
             showMessage(messagesName.success, "Create file succesfully"); 
             resolve()        
         });
@@ -34,18 +37,23 @@ export const renameFile = async (args) => {
         rename(getFullPath(args[0]), getFullPath(args[1]));
         showMessage(messagesName.success, "Rename file succesfully");
     } catch (error) {
-        showMessage(messagesName.error, `Rename file operation failed : ${error}`);
+        showMessage(messagesName.error, `Operation failed: ${error}`);
     }
 }
 
 export const removeFile = async (args) => {
     try {
-        rm(getFullPath(args[0]));
-        showMessage(messagesName.success, "Remove file succesfully");
+      const fullPath = getFullPath(args[0]);
+      await rm(fullPath);
+      showMessage(messagesName.success, "Remove file successfully");
     } catch (error) {
-        showMessage(messagesName.error, `Remove file operation failed : ${error}`);
+      if (error.code === 'ENOENT') {
+        showMessage(messagesName.error, "File not found");
+      } else {
+        showMessage(messagesName.error, `Operation failed: ${error}`);
+      }
     }
-}
+  };
 
 export const readFile = async (args) => {      
     return new Promise((resolve, reject) => {
@@ -53,7 +61,7 @@ export const readFile = async (args) => {
 
         const handleError = (error) => {
             rs.destroy();
-            showMessage(messagesName.error, `Read file operation failed: ${error}`);
+            showMessage(messagesName.error, `Operation failed: ${error}`);
             reject();        
         }; 
     
@@ -76,7 +84,7 @@ export const copyFile = async (args) => {
         const ws = createWriteStream(destinationPath);
         
         const handleError = (error) => {
-            showMessage(messagesName.error, error);
+            showMessage(messagesName.error, `Operation failed: ${error}`);
             rs.destroy();
             ws.end(`Finished with error : ${error}`);
             reject(); 
@@ -101,7 +109,7 @@ export const moveFile = async (args) => {
         const ws = createWriteStream(destinationPath);
         
         const handleError = (error) => {
-            showMessage(messagesName.error, error);            
+            showMessage(messagesName.error, `Operation failed: ${error}`);       
             rs.destroy();
             ws.end(`Finished with error : ${error}`);
             reject();

@@ -16,7 +16,7 @@ export const run = async (command, args) => {
                 await addFile(args);
                 break;
             case COMMANDS.rm:
-                removeFile(args);
+                await removeFile(args);
                 break;
             case COMMANDS.rn:
                 renameFile(args);
@@ -60,7 +60,9 @@ export const run = async (command, args) => {
         }      
         
     } catch (error) {
-        showMessage(messagesName.error, error);
+        if(error) {
+            showMessage(messagesName.error, `Operation failed: ${error}`);
+        }
         
     }
     showMessage(messagesName.curDir);

@@ -42,7 +42,7 @@ export const showMessage = (nameMessage, additionalInfo) => {
             process.stdout.write(`*** Dear user, please enter the desired command. ***`);
             break; 
         case messagesName.notFoundCommand:
-            process.stdout.write(`*** Sorry, entered command not found. ***${endOfLine}`);
+            process.stdout.write(`Invalid input.${endOfLine}`);
             break;
     }
 

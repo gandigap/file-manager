@@ -17,7 +17,7 @@ export const compress = async (args) => {
         const bs = createBrotliCompress();
 
         const handleError = (error) => {
-            showMessage(messagesName.error, error);
+            showMessage(messagesName.error, `Operation failed: ${error}`);
             rs.destroy();
             ws.end(`Finished with error : ${error}`);
             reject();
@@ -50,7 +50,7 @@ export const decompress = async (args) => {
     const bs = createBrotliDecompress();
 
     const handleError = (error) => {
-        showMessage(messagesName.error, error);
+        showMessage(messagesName.error, `Operation failed: ${error}`);
         rs.destroy();
         ws.end(`Finished with error : ${error}`);
     }; 
