@@ -8,6 +8,7 @@ export const messagesName = {
     amountCPU: 'amountCPU',
     homeDir: 'homeDir',
     userName: 'userName',
+    arch: 'arch',
     enterCommand: 'enterCommand',
     notFoundCommand: 'notFoundCommand',
 }

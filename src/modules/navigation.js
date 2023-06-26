@@ -31,7 +31,7 @@ export const ls = async (args) => {
                     name,
                 })
             }
-        });
+        });        
 
         console.table(directories.concat(files));
 

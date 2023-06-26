@@ -5,65 +5,64 @@ import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 import { showMessage } from '../utils/show-message.js';
 import { messagesName } from '../constants/messages-name.js';
 import { removeFile } from './file-system.js';
-import { deleteFile } from '../utils/delete-file.js';
-
-
+import { BR_EXTENSION } from '../constants/common.js';
 
 export const compress = async (args) => {
+    return new Promise((resolve, reject) => { 
     const fileName = basename(args[0]); 
-    const destinationPath = join(args[1],fileName + BR_EXTENSION);
+        const destinationPath = join(args[1],fileName + BR_EXTENSION);
 
-    const rs = createReadStream(args[0]);
-    const ds = createWriteStream(destinationPath);
-    const bs = createBrotliCompress();
+        const rs = createReadStream(args[0]);
+        const ws = createWriteStream(destinationPath);
+        const bs = createBrotliCompress();
 
-    const handleError = (error) => {
-        showMessage(messagesName.error, error);
-        rs.destroy();
-        ds.destroy();
-        bs.destroy();
-    }; 
+        const handleError = (error) => {
+            showMessage(messagesName.error, error);
+            rs.destroy();
+            ws.end(`Finished with error : ${error}`);
+            reject();
+        }; 
 
-    rs.on('error', handleError);
-    ds.on('error', handleError);
-    bs.on('error', handleError);
-    ds.on('finish', () => {
-        deleteFile(args[0]);
-        showMessage(messagesName.success, "File compressed successfully!")
+        rs.on('error', handleError);
+        ws.on('error', handleError);
+        bs.on('error', handleError);
+        ws.on('finish', () => {
+            resolve();
+            showMessage(messagesName.success, "File compressed successfully!");
+        });
+
+        rs.pipe(bs).pipe(ws);
+
     });
-
-    rs.pipe(bs).pipe(ds);
 }
 
 export const decompress = async (args) => {
     let fileName = basename(args[0]); 
 
     if (fileName.endsWith(BR_EXTENSION)) {
-        fileName = fileName.slice(0, -DOT_BR.length);
+        fileName = fileName.slice(0, -BR_EXTENSION.length);
     }
 
     const destinationPath = join(args[1],fileName);
 
     const rs = createReadStream(args[0]);
-    const ds = createWriteStream(destinationPath);
+    const ws = createWriteStream(destinationPath);
     const bs = createBrotliDecompress();
 
     const handleError = (error) => {
         showMessage(messagesName.error, error);
         rs.destroy();
-        ds.destroy();
-        bs.destroy();
+        ws.end(`Finished with error : ${error}`);
     }; 
-    console.error('1');
+
     rs.on('error', handleError);
-    ds.on('error', handleError);
+    ws.on('error', handleError);
     bs.on('error', handleError);
-    ds.on('finish', () => {
-        deleteFile(args[0]);
+    ws.on('finish', () => {
         showMessage(messagesName.success, "File decompressed successfully!")
     });
 
-    rs.pipe(bs).pipe(ds);
+    rs.pipe(bs).pipe(ws);
 }
 
 

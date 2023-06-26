@@ -78,7 +78,7 @@ export const copyFile = async (args) => {
         const handleError = (error) => {
             showMessage(messagesName.error, error);
             rs.destroy();
-            ws.end('Finished with error');
+            ws.end(`Finished with error : ${error}`);
             reject(); 
         };  
 
@@ -103,7 +103,7 @@ export const moveFile = async (args) => {
         const handleError = (error) => {
             showMessage(messagesName.error, error);            
             rs.destroy();
-            ws.end('Finished with error');
+            ws.end(`Finished with error : ${error}`);
             reject();
         };  
 

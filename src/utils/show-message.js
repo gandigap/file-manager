@@ -30,19 +30,21 @@ export const showMessage = (nameMessage, additionalInfo) => {
             process.stdout.write(`CPUS amount: ${additionalInfo}`);
             break;
         case messagesName.homeDir:
-            process.stdout.write(`Home directory: ${additionalInfo}`);
+            process.stdout.write(`Home directory: ${additionalInfo}${endOfLine}`);
             break;
         case messagesName.userName:
-            process.stdout.write(`User name : ${additionalInfo}`);
+            process.stdout.write(`User name : ${additionalInfo}${endOfLine}`);
+            break;
+        case messagesName.arch:
+            process.stdout.write(`CPU architecture : ${additionalInfo}`);
             break;
         case messagesName.enterCommand:
             process.stdout.write(`*** Dear user, please enter the desired command. ***`);
             break; 
         case messagesName.notFoundCommand:
             process.stdout.write(`*** Sorry, entered command not found. ***${endOfLine}`);
-            break;           
-                 
+            break;
     }
+
     process.stdout.write(`${message}${endOfLine}`); 
-    
 }
