@@ -1,4 +1,5 @@
 import { cpus } from 'os';
+
 import { showMessage } from '../utils/show-message.js';
 import { messagesName } from '../constants/messages-name.js';
 

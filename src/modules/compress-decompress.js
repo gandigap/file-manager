@@ -1,4 +1,4 @@
-import { basename, join} from 'path'
+import { basename, join} from 'path';
 import { createReadStream, createWriteStream, unlink } from 'fs';
 import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 

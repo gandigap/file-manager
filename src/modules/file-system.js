@@ -1,4 +1,4 @@
-import path, { basename, join} from 'path'
+import path, { basename, join} from 'path';
 import { rename, rm } from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import { stdout } from 'process';

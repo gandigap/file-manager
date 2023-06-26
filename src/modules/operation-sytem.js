@@ -8,7 +8,7 @@ import { endOfLine } from '../constants/common.js';
 
 export const opepationSystem = (args) => {
     const osArg = args[0];
-    console.log('2')
+
     switch (osArg) {
         case OS_ARGUMENTS.eol:
             showMessage(messagesName.eol, JSON.stringify(EOL));
@@ -23,7 +23,6 @@ export const opepationSystem = (args) => {
             showMessage(messagesName.userName, userInfo().username);
             break;
         case OS_ARGUMENTS.arch:
-            console.log('3')
             showMessage(messagesName.arch, arch());
             break;
         default:
