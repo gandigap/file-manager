@@ -15,11 +15,10 @@ export const showMessage = (nameMessage, additionalInfo) => {
             process.stdout.write(`${additionalInfo}${endOfLine}`);
             break;
         case messagesName.success:
-            process.stdout.write(`${endOfLine}${additionalInfo}${endOfLine}`); 
-            process.stdout.write(`Dear user, please enter the desired command.`);           
+            process.stdout.write(`${endOfLine}${additionalInfo}${endOfLine}`);         
             break;
         case messagesName.curDir:
-            process.stdout.write(`You are currently in ${process.cwd()}${endOfLine}`);
+            process.stdout.write(`You are currently in ${process.cwd()}`);
             break;
         case messagesName.hash:
             process.stdout.write(`Hash file is ${additionalInfo}${endOfLine}`);

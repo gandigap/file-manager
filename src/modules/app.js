@@ -12,7 +12,7 @@ const app = async () => {
     process.stdin.on("data", (data) => { 
         const [command , ...args] = data.toString().trim().split(' ');
       
-        run(command, args);
+        run(command, args);        
     });
 
     process.on('SIGINT', () => exit());
